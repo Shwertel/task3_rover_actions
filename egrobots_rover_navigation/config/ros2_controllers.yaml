@@ -1,0 +1,50 @@
+controller_manager:
+  ros__parameters:
+    update_rate: 30
+
+    joint_state_broadcaster:
+      type: joint_state_broadcaster/JointStateBroadcaster
+
+    diff_drive_controller:
+      type: diff_drive_controller/DiffDriveController
+
+diff_drive_controller:
+  ros__parameters:
+    left_wheel_names: ["wheel_front_left_joint", "wheel_rear_left_joint"]
+    right_wheel_names: ["wheel_front_right_joint", "wheel_rear_right_joint"]
+
+    wheel_separation: 0.56
+    wheel_radius: 0.15
+
+    # Skid-steer must scrub its wheels sideways to turn, so the effective track
+    # is wider than the geometric one. Measured against Gazebo ground truth:
+    # a commanded 0.6 rad/s pivot reported 85 deg of odom yaw for 63 deg of real
+    # yaw (1.35x over-report). Without this, odom yaw drifts tens of degrees and
+    # goal navigation steers toward a heading the robot is not actually on.
+    wheel_separation_multiplier: 1.18
+
+    publish_rate: 30.0
+    odom_frame_id: odom
+    base_frame_id: base_link
+
+    # The EKF (see config/ekf.yaml) owns the odom -> base_link transform now, so
+    # the controller must stop publishing it — two publishers of the same
+    # transform fight and produce a jittering frame tree. The controller still
+    # publishes its odometry on /diff_drive_controller/odom, which the EKF reads.
+    enable_odom_tf: false
+
+    cmd_vel_timeout: 0.5
+    use_stamped_vel: false
+
+    linear:
+      x:
+        has_velocity_limits: true
+        max_velocity: 1.0
+        has_acceleration_limits: true
+        max_acceleration: 2.0
+    angular:
+      z:
+        has_velocity_limits: true
+        max_velocity: 0.9
+        has_acceleration_limits: true
+        max_acceleration: 3.0

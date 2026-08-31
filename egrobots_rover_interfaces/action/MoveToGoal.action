@@ -1,0 +1,22 @@
+# Drive the rover to a target position, avoiding obstacles on the way.
+#
+# The three sections below are what separates an action from a service. A
+# service has only the first and second (request/response); the third — feedback
+# streamed while the work is still running — and the ability to cancel a goal in
+# flight are what make an action the right fit for a task that takes time.
+
+# --- Goal: what the caller asks for (R1) -------------------------------------
+geometry_msgs/Point target      # target position in the reference frame
+float64 tolerance               # arrival radius; <= 0 uses the node's default
+---
+# --- Result: how it ended (R4, R7) -------------------------------------------
+bool success
+string message                  # human-readable outcome, e.g. why it aborted
+float64 final_distance_error    # how far from the target it actually stopped
+geometry_msgs/Point final_position
+---
+# --- Feedback: published while driving (R6) ----------------------------------
+float64 distance_remaining
+float64 heading_error_deg
+geometry_msgs/Point current_position
+string state                    # DRIVING | TURNING | AVOIDING | CLEARING

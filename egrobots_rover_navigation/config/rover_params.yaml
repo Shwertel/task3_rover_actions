@@ -1,0 +1,31 @@
+rover_node:
+  ros__parameters:
+    # --- obstacle avoidance (R3) ---
+    safe_distance: 1.2
+    clear_distance: 1.5
+    linear_speed: 1.0
+    angular_speed: 0.8
+    cone_angle_deg: 30.0
+    clearing_distance: 2.0
+    direction_scan_deg: 90.0
+
+    # --- goal seeking (R2, R4) ---
+    goal_tolerance: 0.15
+    heading_tolerance_deg: 30.0
+    goal_approach_distance: 1.0
+    heading_kp: 1.5
+
+    # --- R7: give up on an unreachable target ---
+    # Abort if the rover has not closed the gap by stall_min_progress within
+    # stall_timeout seconds. Catches being boxed in, wedged on geometry, or
+    # simply sent somewhere it cannot get to — no map required.
+    stall_timeout: 12.0
+    stall_min_progress: 0.15
+    goal_timeout: 180.0
+
+    # --- geofence patrol, still on services ---
+    max_distance_from_origin: 5.0
+    boundary_return_ratio: 0.9
+
+    reference_frame: "odom"
+    robot_frame: "base_link"
