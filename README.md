@@ -205,3 +205,14 @@ odometry at 7.068 m against a true 7.056 m — 1.2 cm.
 - **The stall detector cannot distinguish "unreachable" from "slow".** A rover
   legitimately taking a long detour around a large obstacle can trip it; the
   thresholds are tuned for the test world, not proven generally.
+
+
+[Task3_aborted.webm](https://github.com/user-attachments/assets/006f8aab-c444-40de-a879-b8ed8f8795c5)
+
+
+[Task3_cancellatioin.webm](https://github.com/user-attachments/assets/d81ef8b5-8a32-4d69-9703-09de878cc2d3)
+
+
+[Task3_target.webm](https://github.com/user-attachments/assets/1fee1565-5ff0-4b5f-bd86-dbac5956e73a)
+
+
